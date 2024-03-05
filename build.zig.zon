@@ -1,0 +1,20 @@
+.{
+    .name = "toybox",
+    .version = "1.8.10",
+
+    .minimum_zig_version = "0.12.0-dev.3152+90c1a2c41",
+
+    .dependencies = .{
+        .toybox = .{
+            .url = "https://github.com/landley/toybox/archive/5b9542cbf840fc43e04f60e92a8c8970312c1cdf.tar.gz",
+            .hash = "12200df6de15be1ebba3ff556f9aa147f2c358bc1771c8a6f0787e82f4a7de19372c",
+        },
+    },
+    .paths = .{
+        "include",
+        "build.zig",
+        "build.zig.zon",
+        //"LICENSE",
+        //"README.md",
+    },
+}
