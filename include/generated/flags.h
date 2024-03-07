@@ -219,7 +219,7 @@
 #undef FLAG_u
 #endif
 
-// cd   >1LP[-LP]
+// cd >1LP[-LP] >1LP[-LP]
 #undef OPTSTR_cd
 #define OPTSTR_cd ">1LP[-LP]"
 #ifdef CLEANUP_cd
@@ -520,7 +520,7 @@
 #undef FOR_deallocvt
 #endif
 
-// declare   pAailunxr
+// declare pAailunxr pAailunxr
 #undef OPTSTR_declare
 #define OPTSTR_declare "pAailunxr"
 #ifdef CLEANUP_declare
@@ -862,7 +862,7 @@
 #undef FOR_eval
 #endif
 
-// exec   ^cla:
+// exec ^cla: ^cla:
 #undef OPTSTR_exec
 #define OPTSTR_exec "^cla:"
 #ifdef CLEANUP_exec
@@ -890,7 +890,7 @@
 #undef FLAG_t
 #endif
 
-// export   np
+// export np np
 #undef OPTSTR_export
 #define OPTSTR_export "np"
 #ifdef CLEANUP_export
@@ -1678,7 +1678,7 @@
 #undef FLAG_a
 #endif
 
-// jobs   lnprs
+// jobs lnprs lnprs
 #undef OPTSTR_jobs
 #define OPTSTR_jobs "lnprs"
 #ifdef CLEANUP_jobs
@@ -2876,7 +2876,7 @@
 #undef FLAG_w
 #endif
 
-// sh   0^(noediting)(noprofile)(norc)sc:i
+// sh 0^(noediting)(noprofile)(norc)sc:i 0^(noediting)(noprofile)(norc)sc:i
 #undef OPTSTR_sh
 #define OPTSTR_sh "0^(noediting)(noprofile)(norc)sc:i"
 #ifdef CLEANUP_sh
@@ -2901,7 +2901,7 @@
 #undef FLAG_b
 #endif
 
-// shift   >1
+// shift >1 >1
 #undef OPTSTR_shift
 #define OPTSTR_shift ">1"
 #ifdef CLEANUP_shift
@@ -3021,7 +3021,7 @@
 #undef FLAG_g
 #endif
 
-// source   <1
+// source <1 <1
 #undef OPTSTR_source
 #define OPTSTR_source "<1"
 #ifdef CLEANUP_source
@@ -3643,7 +3643,7 @@
 #undef FOR_unlink
 #endif
 
-// unset   fvn[!fv]
+// unset fvn[!fv] fvn[!fv]
 #undef OPTSTR_unset
 #define OPTSTR_unset "fvn[!fv]"
 #ifdef CLEANUP_unset
@@ -3776,7 +3776,7 @@
 #undef FOR_w
 #endif
 
-// wait   n
+// wait n n
 #undef OPTSTR_wait
 #define OPTSTR_wait "n"
 #ifdef CLEANUP_wait
@@ -4125,8 +4125,8 @@
 #ifndef TT
 #define TT this.cd
 #endif
-#define FLAG_P (FORCED_FLAG<<0)
-#define FLAG_L (FORCED_FLAG<<1)
+#define FLAG_P (1LL<<0)
+#define FLAG_L (1LL<<1)
 #endif
 
 #ifdef FOR_chattr
@@ -4402,15 +4402,15 @@
 #ifndef TT
 #define TT this.declare
 #endif
-#define FLAG_r (FORCED_FLAG<<0)
-#define FLAG_x (FORCED_FLAG<<1)
-#define FLAG_n (FORCED_FLAG<<2)
-#define FLAG_u (FORCED_FLAG<<3)
-#define FLAG_l (FORCED_FLAG<<4)
-#define FLAG_i (FORCED_FLAG<<5)
-#define FLAG_a (FORCED_FLAG<<6)
-#define FLAG_A (FORCED_FLAG<<7)
-#define FLAG_p (FORCED_FLAG<<8)
+#define FLAG_r (1LL<<0)
+#define FLAG_x (1LL<<1)
+#define FLAG_n (1LL<<2)
+#define FLAG_u (1LL<<3)
+#define FLAG_l (1LL<<4)
+#define FLAG_i (1LL<<5)
+#define FLAG_a (1LL<<6)
+#define FLAG_A (1LL<<7)
+#define FLAG_p (1LL<<8)
 #endif
 
 #ifdef FOR_demo_many_options
@@ -4723,9 +4723,9 @@
 #ifndef TT
 #define TT this.exec
 #endif
-#define FLAG_a (FORCED_FLAG<<0)
-#define FLAG_l (FORCED_FLAG<<1)
-#define FLAG_c (FORCED_FLAG<<2)
+#define FLAG_a (1LL<<0)
+#define FLAG_l (1LL<<1)
+#define FLAG_c (1LL<<2)
 #endif
 
 #ifdef FOR_exit
@@ -4748,8 +4748,8 @@
 #ifndef TT
 #define TT this.export
 #endif
-#define FLAG_p (FORCED_FLAG<<0)
-#define FLAG_n (FORCED_FLAG<<1)
+#define FLAG_p (1LL<<0)
+#define FLAG_n (1LL<<1)
 #endif
 
 #ifdef FOR_expr
@@ -5469,11 +5469,11 @@
 #ifndef TT
 #define TT this.jobs
 #endif
-#define FLAG_s (FORCED_FLAG<<0)
-#define FLAG_r (FORCED_FLAG<<1)
-#define FLAG_p (FORCED_FLAG<<2)
-#define FLAG_n (FORCED_FLAG<<3)
-#define FLAG_l (FORCED_FLAG<<4)
+#define FLAG_s (1LL<<0)
+#define FLAG_r (1LL<<1)
+#define FLAG_p (1LL<<2)
+#define FLAG_n (1LL<<3)
+#define FLAG_l (1LL<<4)
 #endif
 
 #ifdef FOR_kill
@@ -6572,12 +6572,12 @@
 #ifndef TT
 #define TT this.sh
 #endif
-#define FLAG_i (FORCED_FLAG<<0)
-#define FLAG_c (FORCED_FLAG<<1)
-#define FLAG_s (FORCED_FLAG<<2)
-#define FLAG_norc (FORCED_FLAG<<3)
-#define FLAG_noprofile (FORCED_FLAG<<4)
-#define FLAG_noediting (FORCED_FLAG<<5)
+#define FLAG_i (1LL<<0)
+#define FLAG_c (1LL<<1)
+#define FLAG_s (1LL<<2)
+#define FLAG_norc (1LL<<3)
+#define FLAG_noprofile (1LL<<4)
+#define FLAG_noediting (1LL<<5)
 #endif
 
 #ifdef FOR_sha3sum
@@ -7283,9 +7283,9 @@
 #ifndef TT
 #define TT this.unset
 #endif
-#define FLAG_n (FORCED_FLAG<<0)
-#define FLAG_v (FORCED_FLAG<<1)
-#define FLAG_f (FORCED_FLAG<<2)
+#define FLAG_n (1LL<<0)
+#define FLAG_v (1LL<<1)
+#define FLAG_f (1LL<<2)
 #endif
 
 #ifdef FOR_unshare
@@ -7403,7 +7403,7 @@
 #ifndef TT
 #define TT this.wait
 #endif
-#define FLAG_n (FORCED_FLAG<<0)
+#define FLAG_n (1LL<<0)
 #endif
 
 #ifdef FOR_watch

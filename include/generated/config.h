@@ -280,8 +280,8 @@
 #define USE_MORE(...)
 #define CFG_ROUTE 0
 #define USE_ROUTE(...)
-#define CFG_SH 0
-#define USE_SH(...)
+#define CFG_SH 1
+#define USE_SH(...) __VA_ARGS__
 #define CFG_CD 0
 #define USE_CD(...)
 #define CFG_DECLARE 0

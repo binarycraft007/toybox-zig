@@ -253,4 +253,5 @@ const toybox_src = [_][]const u8{
     "toys/posix/wc.c",
     "toys/posix/who.c",
     "toys/posix/xargs.c",
+    "toys/pending/sh.c",
 };

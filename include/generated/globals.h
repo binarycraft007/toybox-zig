@@ -395,6 +395,80 @@ struct xxd_data {
   long s, g, o, l, c;
 };
 
+struct sh_data {
+  union {
+    struct {
+      char *c;
+    } sh;
+    struct {
+      char *a;
+    } exec;
+  };
+
+  // keep SECONDS here: used to work around compiler limitation in run_command()
+  long long SECONDS;
+  char *isexec, *wcpat;
+  unsigned options, jobcnt, LINENO;
+  int hfd, pid, bangpid, srclvl, recursion, recfile[50+200*CFG_TOYBOX_FORK];
+
+  // Callable function array
+  struct sh_function {
+    char *name;
+    struct sh_pipeline {  // pipeline segments: linked list of arg w/metadata
+      struct sh_pipeline *next, *prev, *end;
+      int count, here, type, lineno;
+      struct sh_arg {
+        char **v;
+        int c;
+      } arg[1];
+    } *pipeline;
+    unsigned long refcount;
+  } **functions;
+  long funcslen;
+
+  // runtime function call stack
+  struct sh_fcall {
+    struct sh_fcall *next, *prev;
+
+    // This dlist in reverse order: TT.ff current function, TT.ff->prev globals
+    struct sh_vars {
+      long flags;
+      char *str;
+    } *vars;
+    long varslen, varscap, shift, oldlineno;
+
+    struct sh_function *func; // TODO wire this up
+    struct sh_pipeline *pl;
+    char *ifs, *omnom;
+    struct sh_arg arg;
+    struct arg_list *delete;
+
+    // Runtime stack of nested if/else/fi and for/do/done contexts.
+    struct sh_blockstack {
+      struct sh_blockstack *next;
+      struct sh_pipeline *start, *middle;
+      struct sh_process *pp;       // list of processes piping in to us
+      int run, loop, *urd, pout, pipe;
+      struct sh_arg farg;          // for/select arg stack, case wildcard deck
+      struct arg_list *fdelete;    // farg's cleanup list
+      char *fvar;                  // for/select's iteration variable name
+    } *blk;
+  } *ff;
+
+// TODO ctrl-Z suspend should stop script
+  struct sh_process {
+    struct sh_process *next, *prev; // | && ||
+    struct arg_list *delete;   // expanded strings
+    // undo redirects, a=b at start, child PID, exit status, has !, job #
+    int *urd, envlen, pid, exit, flags, job, dash;
+    long long when; // when job backgrounded/suspended
+    struct sh_arg *raw, arg;
+  } *pp; // currently running process
+
+  // job list, command line for $*, scratch space for do_wildcard_files()
+  struct sh_arg jobs, *wcdeck;
+};
+
 struct basename_data {
   char *s;
 };
@@ -838,6 +912,7 @@ extern union global_union {
 	struct watch_data watch;
 	struct watchdog_data watchdog;
 	struct xxd_data xxd;
+	struct sh_data sh;
 	struct basename_data basename;
 	struct cal_data cal;
 	struct chgrp_data chgrp;
